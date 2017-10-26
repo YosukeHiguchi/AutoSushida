@@ -33,6 +33,9 @@ driver.get('http://neutral.x0.com/home/sushida/play2.html')
 
 driver.execute_script("document.body.style.zoom = '2.0'")
 driver.execute_script('window.scrollTo(230, 250)')
+driver.execute_script('window.resizeTo(1050, 750)')
+
+
 
 # set up game by hand
 time.sleep(12)
@@ -61,11 +64,11 @@ while True:
         builder=pyocr.builders.TextBuilder(tesseract_layout=6)
     )
 
-    print(txt)
+    #print(txt)
     for t in txt.split():
-        if (len(t) > 1):
+        if (len(t) > 2):
             print(t)
-            driver.find_element_by_tag_name("embed").send_keys(txt)
+            driver.find_element_by_tag_name("embed").send_keys(t)
             break
 
     time.sleep(0.5)
