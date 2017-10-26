@@ -31,10 +31,11 @@ capabilities = {'chrome.binary': '/Applications/Google\ Chrome.app'};
 driver = webdriver.Remote(serv.service_url, capabilities)
 driver.get('http://neutral.x0.com/home/sushida/play2.html')
 
-driver.execute_script("document.body.style.zoom = '1.5'")
+driver.execute_script("document.body.style.zoom = '2.0'")
+driver.execute_script('window.scrollTo(230, 250)')
 
 # set up game by hand
-time.sleep(15)
+time.sleep(12)
 
 # Start game
 driver.find_element_by_tag_name("embed").send_keys(Keys.SPACE)
@@ -42,10 +43,16 @@ driver.find_element_by_tag_name("embed").send_keys(Keys.SPACE)
 # ready set go
 time.sleep(2)
 
+
+imgX = 32
+imgY = 346
+cropW = 940
+cropH = 50
+
 while True:
     driver.save_screenshot("txt.png")
     im = Image.open("txt.png")
-    box = (202, 450, 922, 490)
+    box = (imgX, imgY, imgX + cropW, imgY + cropH)
     im = im.crop(box)
 
     txt = tool.image_to_string(
